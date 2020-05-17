@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eu
 
+echo remember to "git submodule update --init --recursive"
+sleep 10
+
 # Find date command
 if [[ $(uname -s) == Darwin ]]; then
   MYDIR=$(cd "$(dirname "$(greadlink -f -n "${BASH_SOURCE[0]}" )" )" && pwd -P)
