@@ -8,10 +8,17 @@ else
   MYDIR=$(cd "$(dirname "$(readlink -f -n "${BASH_SOURCE[0]}" )" )" && pwd -P)
 fi
 
+module load intel/18.0.5.274
+module load impi/2018.0.4
+module load netcdf/4.7.0
+module use -a /scratch1/BMC/gmtb/software/modulefiles/intel-18.0.5.274/impi-2018.0.4
+module load NCEPlibs/1.0.0
+
+
 export CMAKE_Platform=${CMAKE_Platform:?"Please set the CMAKE_Platform environment variable, e.g. [macosx.gnu|linux.gnu|linux.intel|hera.intel|...]"}
-export CMAKE_C_COMPILER=${CMAKE_C_COMPILER:-mpicc}
-export CMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER:-mpicxx}
-export CMAKE_Fortran_COMPILER=${CMAKE_Fortran_COMPILER:-mpif90}
+export CMAKE_C_COMPILER=${CMAKE_C_COMPILER:-mpiicc}
+export CMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER:-mpiicpc}
+export CMAKE_Fortran_COMPILER=${CMAKE_Fortran_COMPILER:-mpiifort}
 
 export BACIO_LIB4=${BACIO_LIB4:?"Please set BACIO_LIB4 environment variable"}
 export NEMSIO_INC=${NEMSIO_INC:?"Please set NEMSIO_INC environment variable"}
@@ -21,6 +28,8 @@ export W3EMC_LIBd=${W3EMC_LIBd:?"Please set W3EMC_LIBd environment variable"}
 export W3NCO_LIBd=${W3NCO_LIBd:?"Please set W3NCO_LIBd environment variable"}
 export NETCDF=${NETCDF:?"Please set NETCDF environment variable"}
 export ESMFMKFILE=${ESMFMKFILE:?"Please set ESMFMKFILE environment variable"}
+module use /scratch1/NCEPDEV/global/gwv/lp/lib/modulefiles 
+module load esmflocal/8.0.1.08bs
 
 BUILD_DIR=${MYDIR}/build
 rm -rf ${BUILD_DIR}
