@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --job-name=ufs_simple_test_case
+#SBATCH --ntasks=8
+#SBATCH --time=00:20:00
+#SBATCH --account=windfall
+#SBATCH --partition=orion
+#SBATCH --qos=windfall
+#SBATCH --output=out
+
+# Setup environment
+#module use __PATH_TO_MODULEFILE__
+module load contrib
+module load noaatools
+module load intel impi
+
+srun ufs_weather_model
